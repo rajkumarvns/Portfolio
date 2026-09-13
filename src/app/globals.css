@@ -1,0 +1,168 @@
+﻿@import "tailwindcss";
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Responsive font sizes */
+@media (max-width: 640px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1025px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Ensure images are responsive */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 640px) {
+    button, a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Optimize scrollbar for desktop */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@layer utilities{
+    .gradient{
+        background: linear-gradient(-45deg, #302b63, #00bf8f, #1cd8d2 );
+    }
+
+    /* Responsive padding utilities */
+    .px-safe {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+
+    .py-safe {
+        padding-top: max(1rem, env(safe-area-inset-top));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    /* Responsive containers */
+    .container-responsive {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .container-responsive {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .container-responsive {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+
+    /* Touch-friendly spacing */
+    .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Responsive gap utilities */
+    .gap-responsive {
+        gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .gap-responsive {
+            gap: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .gap-responsive {
+            gap: 2rem;
+        }
+    }
+
+    /* Better readability on mobile */
+    .text-responsive-base {
+        font-size: 0.875rem;
+    }
+
+    @media (min-width: 768px) {
+        .text-responsive-base {
+            font-size: 1rem;
+        }
+    }
+
+    .text-responsive-lg {
+        font-size: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .text-responsive-lg {
+            font-size: 1.125rem;
+        }
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
