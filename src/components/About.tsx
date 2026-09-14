@@ -59,7 +59,7 @@ export default function About() {
               {[
                 { label: "Education", value: "B.Tech CSE (7.86 CGPA)" },
                 { label: "Achievement", value: "SIH Internal Winner" },
-                { label: "Dedication", value: "100+ Days LeetCode" },
+                { label: "Dedication", value: "50+ Days LeetCode" },
               ].map((item, i) => (
                 <motion.div
                   key={i}

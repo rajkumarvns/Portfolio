@@ -67,7 +67,7 @@ const HeroAvatar = () => {
       }}
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.7, duration: 1 }}
+      transition={{ delay: 0.2, duration: 0.8 }}
     >
       <div
         className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
@@ -83,13 +83,19 @@ const HeroAvatar = () => {
         }}
       />
       <motion.img
-        src="/avator.png"
-        alt="Raj Kumar Gupta avatar"
+        src="/hero_avtar.png"
+        alt="Software Developer avatar"
         className="absolute top-1/2 -translate-y-1/2 object-contain select-none pointer-events-none"
-        style={{ right: "-30px", width: "min(45vw, 780px)", maxHeight: "90vh", transform: "translateZ(50px)" }}
+        style={{ 
+          right: "-30px", 
+          width: "min(45vw, 780px)", 
+          maxHeight: "90vh", 
+          transform: "translateZ(50px)",
+          zIndex: 20 
+        }}
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay: 1, duration: 1 }}
+        transition={{ delay: 0.4, duration: 0.8 }}
       />
     </motion.div>
   );
@@ -160,7 +166,7 @@ const Hero = forwardRef<HTMLElement, {}>((props, ref) => {
           className="flex flex-col justify-center h-full text-center lg:text-left relative py-8 lg:py-0"
           initial={{ opacity: 0, y: 120 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="w-full lg:pr-24 mx-auto max-w-7xl">
             {/* typing text */}
@@ -168,7 +174,7 @@ const Hero = forwardRef<HTMLElement, {}>((props, ref) => {
               className="mb-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
             >
               <span>{roles[index].substring(0, subIndex)}</span>
               <span
@@ -183,7 +189,7 @@ const Hero = forwardRef<HTMLElement, {}>((props, ref) => {
               bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] drop-shadow-lg"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
             >
               Hello, I'm
               <br />
@@ -197,7 +203,7 @@ const Hero = forwardRef<HTMLElement, {}>((props, ref) => {
               className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
             >
               I turn complex ideas into seamless, high-impact web experiences —
               building modern, scalable, and lightning-fast applications that
@@ -209,7 +215,7 @@ const Hero = forwardRef<HTMLElement, {}>((props, ref) => {
               className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.8 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
             >
               <Magnetic>
                 <a
@@ -238,7 +244,7 @@ const Hero = forwardRef<HTMLElement, {}>((props, ref) => {
               className="mt-10 flex gap-5 text-2xl md:text-3xl justify-center lg:justify-start"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4, duration: 0.8 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
             >
               {socials.map(({ Icon, label, href }) => (
                 <Magnetic key={label} pull={0.4}>

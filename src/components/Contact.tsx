@@ -21,6 +21,7 @@ export default function Contact() {
     name: "",
     email: "",
     service: "",
+    currency: "USD",
     budget: "",
     idea: "",
   });
@@ -84,9 +85,9 @@ export default function Contact() {
         );
       }
       setStatus("success");
-      setFormData({ name: "", email: "", service: "", budget: "", idea: "" });
-    } catch (err) {
-      console.error("EmailJS Error:", err);
+      setFormData({ name: "", email: "", service: "", currency: "USD", budget: "", idea: "" });
+    } catch (err: any) {
+      console.error("EmailJS Error:", err?.text || err?.message || err);
       setStatus("error");
     }
   };
@@ -192,8 +193,8 @@ export default function Contact() {
               <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 
               <motion.img
-                src="/astra.jpg"
-                alt="3D Astronaut working on a laptop"
+                src="/developer.jpg"
+                alt="Stylized 3D Software Developer Character"
                 className="relative w-64 rounded-2xl object-cover shadow-2xl xs:w-72 sm:w-80 md:w-96 lg:w-full"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -367,9 +368,19 @@ export default function Contact() {
                           htmlFor="contact-budget"
                           className="mb-1.5 block text-xs font-medium text-gray-400"
                         >
-                          Budget (USD) <span className="text-cyan-400">*</span>
+                          Budget <span className="text-cyan-400">*</span>
                         </label>
-                        <div className="relative">
+                        <div className="relative flex">
+                          <select
+                            name="currency"
+                            value={formData.currency}
+                            onChange={handleChange}
+                            className="absolute left-1 top-1 bottom-1 z-10 w-[70px] cursor-pointer appearance-none rounded-md border-r border-white/10 bg-transparent px-2 text-sm text-gray-300 focus:outline-none"
+                            style={{ backgroundImage: "url(\"data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239CA3AF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right .5rem top 50%", backgroundSize: ".65rem auto" }}
+                          >
+                            <option value="USD" className="text-black">USD</option>
+                            <option value="INR" className="text-black">INR</option>
+                          </select>
                           <input
                             id="contact-budget"
                             type="text"
@@ -379,7 +390,7 @@ export default function Contact() {
                             value={formData.budget}
                             onChange={handleChange}
                             aria-invalid={!!errors.budget}
-                            className={`w-full rounded-lg border bg-white/5 p-2.5 pl-4 text-sm text-white placeholder:text-gray-600 transition-all duration-300 focus:outline-none ${fieldClasses(
+                            className={`w-full rounded-lg border bg-white/5 p-2.5 pl-[85px] text-sm text-white placeholder:text-gray-600 transition-all duration-300 focus:outline-none ${fieldClasses(
                               "budget"
                             )}`}
                           />
