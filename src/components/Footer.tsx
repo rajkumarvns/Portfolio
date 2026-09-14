@@ -5,7 +5,11 @@ import { motion } from "framer-motion";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa6";
 
 const socials = [
-  { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/raj-kumar-gupta-990093305/" },
+  {
+    Icon: FaLinkedinIn,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/raj-kumar-gupta-990093305/",
+  },
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/rajkumarvns" },
 ];
 

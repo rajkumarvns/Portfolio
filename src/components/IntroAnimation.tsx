@@ -9,12 +9,13 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(MorphSVGPlugin);
 }
 
-export default function IntroAnimation({ onFinish }: { onFinish?: () => void }) {
-  const greetings = [
-    "Hii", "Hello", "नमस्ते", "Hola",
-    "Hej", "Hallo", 
-  ];
+const greetings = ["Hii", "Hello", "नमस्ते", "Hola", "Hej", "Hallo"];
 
+export default function IntroAnimation({
+  onFinish,
+}: {
+  onFinish?: () => void;
+}) {
   const [index, setIndex] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLHeadingElement>(null);
@@ -26,14 +27,14 @@ export default function IntroAnimation({ onFinish }: { onFinish?: () => void }) 
       gsap.fromTo(
         greetingRef.current,
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.12 }
+        { opacity: 1, y: 0, duration: 0.12 },
       );
-      greetingTimer = setTimeout(() => setIndex(i => i + 1), 180);
+      greetingTimer = setTimeout(() => setIndex((i) => i + 1), 180);
     } else {
       gsap.fromTo(
         greetingRef.current,
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.12 }
+        { opacity: 1, y: 0, duration: 0.12 },
       );
 
       greetingTimer = setTimeout(() => {
@@ -58,9 +59,9 @@ export default function IntroAnimation({ onFinish }: { onFinish?: () => void }) 
                 morphSVG: "M0,0 L0,300 Q720,900 1440,300 L1440,0 Z",
                 ease: "power4.inOut",
               },
-              "<"
+              "<",
             );
-          } catch (e) {
+          } catch {
             tl.to(
               path,
               {
@@ -68,7 +69,7 @@ export default function IntroAnimation({ onFinish }: { onFinish?: () => void }) 
                 attr: { d: "M0,0 L0,300 Q720,900 1440,300 L1440,0 Z" },
                 ease: "power4.inOut",
               },
-              "<"
+              "<",
             );
           }
         }

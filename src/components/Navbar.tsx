@@ -24,7 +24,7 @@ export default function Navbar() {
           setForceVisible(false);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (homeSection) observer.observe(homeSection);
@@ -97,7 +97,11 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} hamburgerRef={hamburgerRef} />
+      <OverlayMenu
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        hamburgerRef={hamburgerRef}
+      />
     </>
   );
 }

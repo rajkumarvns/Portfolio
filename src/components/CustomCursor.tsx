@@ -11,10 +11,10 @@ export default function CustomCursor() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768 || window.ontouchstart !== undefined);
     };
-    
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    
+
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 

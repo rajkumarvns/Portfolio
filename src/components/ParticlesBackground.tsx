@@ -13,7 +13,7 @@ export default function ParticlesBackground() {
     if (!ctx) return;
 
     const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     let width = 0;
@@ -99,7 +99,7 @@ export default function ParticlesBackground() {
     const createParticles = () => {
       particles = Array.from(
         { length: getParticleCount() },
-        () => new Particle()
+        () => new Particle(),
       );
     };
 
@@ -182,7 +182,9 @@ export default function ParticlesBackground() {
     render();
 
     window.addEventListener("resize", resizeCanvas);
-    window.addEventListener("pointermove", handlePointerMove as EventListener, { passive: true });
+    window.addEventListener("pointermove", handlePointerMove as EventListener, {
+      passive: true,
+    });
     window.addEventListener("mouseout", handleMouseOut as EventListener);
     window.addEventListener("blur", clearMouse);
     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -191,7 +193,10 @@ export default function ParticlesBackground() {
       paused = true;
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", resizeCanvas);
-      window.removeEventListener("pointermove", handlePointerMove as EventListener);
+      window.removeEventListener(
+        "pointermove",
+        handlePointerMove as EventListener,
+      );
       window.removeEventListener("mouseout", handleMouseOut as EventListener);
       window.removeEventListener("blur", clearMouse);
       document.removeEventListener("visibilitychange", handleVisibilityChange);

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import ParticlesBackground from "./ParticlesBackground";
-import Image from "next/image";
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_SERVICE_ID || "";
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_TEMPLATE_ID || "";
@@ -39,7 +38,11 @@ export default function Contact() {
 
   const needsBudget = formData.service !== "" && formData.service !== "other";
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     const { name, value } = e.target;
 
     if (name === "budget" && value && !/^\d+$/.test(value)) return;
@@ -54,7 +57,7 @@ export default function Contact() {
     const newErrors: Record<string, string> = {};
 
     required.forEach(
-      (f) => !formData[f].trim() && (newErrors[f] = "Fill this field")
+      (f) => !formData[f].trim() && (newErrors[f] = "Fill this field"),
     );
 
     if (needsBudget && !formData.budget.trim())
@@ -81,13 +84,20 @@ export default function Contact() {
             from_name: formData.name,
             reply_to: formData.email,
           },
-          PUBLIC_KEY
+          PUBLIC_KEY,
         );
       }
       setStatus("success");
-      setFormData({ name: "", email: "", service: "", currency: "USD", budget: "", idea: "" });
-    } catch (err: any) {
-      console.error("EmailJS Error:", err?.text || err?.message || err);
+      setFormData({
+        name: "",
+        email: "",
+        service: "",
+        currency: "USD",
+        budget: "",
+        idea: "",
+      });
+    } catch (err: unknown) {
+      console.error("EmailJS Error:", (err as Error)?.message || err);
       setStatus("error");
     }
   };
@@ -197,7 +207,11 @@ export default function Contact() {
                 alt="Stylized 3D Software Developer Character"
                 className="relative w-64 rounded-2xl object-cover shadow-2xl xs:w-72 sm:w-80 md:w-96 lg:w-full"
                 animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 whileHover={{ scale: 1.02 }}
               />
 
@@ -216,7 +230,11 @@ export default function Contact() {
                 </h2>
               </div>
 
-              <form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
+              <form
+                className="flex flex-col gap-4"
+                onSubmit={handleSubmit}
+                noValidate
+              >
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <motion.div
                     variants={formFieldVariants}
@@ -239,7 +257,7 @@ export default function Contact() {
                         onChange={handleChange}
                         aria-invalid={!!errors.name}
                         className={`w-full rounded-lg border bg-white/5 p-2.5 pl-4 text-sm text-white placeholder:text-gray-600 transition-all duration-300 focus:outline-none ${fieldClasses(
-                          "name"
+                          "name",
                         )}`}
                       />
                     </div>
@@ -278,7 +296,7 @@ export default function Contact() {
                         onChange={handleChange}
                         aria-invalid={!!errors.email}
                         className={`w-full rounded-lg border bg-white/5 p-2.5 pl-4 text-sm text-white placeholder:text-gray-600 transition-all duration-300 focus:outline-none ${fieldClasses(
-                          "email"
+                          "email",
                         )}`}
                       />
                     </div>
@@ -321,7 +339,7 @@ export default function Contact() {
                         onChange={handleChange}
                         aria-invalid={!!errors.service}
                         className={`w-full cursor-pointer appearance-none rounded-lg border bg-white/5 p-2.5 pl-4 pr-9 text-sm text-white transition-all duration-300 focus:outline-none ${fieldClasses(
-                          "service"
+                          "service",
                         )}`}
                       >
                         <option value="" disabled className="text-gray-400">
@@ -376,10 +394,20 @@ export default function Contact() {
                             value={formData.currency}
                             onChange={handleChange}
                             className="absolute left-1 top-1 bottom-1 z-10 w-[70px] cursor-pointer appearance-none rounded-md border-r border-white/10 bg-transparent px-2 text-sm text-gray-300 focus:outline-none"
-                            style={{ backgroundImage: "url(\"data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239CA3AF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right .5rem top 50%", backgroundSize: ".65rem auto" }}
+                            style={{
+                              backgroundImage:
+                                'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239CA3AF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")',
+                              backgroundRepeat: "no-repeat",
+                              backgroundPosition: "right .5rem top 50%",
+                              backgroundSize: ".65rem auto",
+                            }}
                           >
-                            <option value="USD" className="text-black">USD</option>
-                            <option value="INR" className="text-black">INR</option>
+                            <option value="USD" className="text-black">
+                              USD
+                            </option>
+                            <option value="INR" className="text-black">
+                              INR
+                            </option>
                           </select>
                           <input
                             id="contact-budget"
@@ -391,7 +419,7 @@ export default function Contact() {
                             onChange={handleChange}
                             aria-invalid={!!errors.budget}
                             className={`w-full rounded-lg border bg-white/5 p-2.5 pl-[85px] text-sm text-white placeholder:text-gray-600 transition-all duration-300 focus:outline-none ${fieldClasses(
-                              "budget"
+                              "budget",
                             )}`}
                           />
                         </div>
@@ -433,7 +461,7 @@ export default function Contact() {
                       onChange={handleChange}
                       aria-invalid={!!errors.idea}
                       className={`w-full resize-none rounded-lg border bg-white/5 p-2.5 pl-4 text-sm text-white placeholder:text-gray-600 transition-all duration-300 focus:outline-none ${fieldClasses(
-                        "idea"
+                        "idea",
                       )}`}
                     />
                   </div>
@@ -463,16 +491,16 @@ export default function Contact() {
                         status === "sending"
                           ? "border border-yellow-500/20 bg-yellow-500/15 text-yellow-300"
                           : status === "success"
-                          ? "border border-green-500/20 bg-green-500/15 text-green-300"
-                          : "border border-red-500/20 bg-red-500/15 text-red-300"
+                            ? "border border-green-500/20 bg-green-500/15 text-green-300"
+                            : "border border-red-500/20 bg-red-500/15 text-red-300"
                       }`}
                     >
                       <span>
                         {status === "sending"
                           ? "Sending..."
                           : status === "success"
-                          ? "Message sent! I'll get back to you soon. ✅"
-                          : "Something went wrong. Please try again. ❌"}
+                            ? "Message sent! I'll get back to you soon. ✅"
+                            : "Something went wrong. Please try again. ❌"}
                       </span>
                     </motion.div>
                   )}
@@ -496,11 +524,7 @@ export default function Contact() {
                   `}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    {status === "sending" ? (
-                      "Sending..."
-                    ) : (
-                      "Send Message"
-                    )}
+                    {status === "sending" ? "Sending..." : "Send Message"}
                   </span>
                 </motion.button>
               </form>

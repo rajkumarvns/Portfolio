@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import TextReveal from "./TextReveal";
 
 const experiences = [
@@ -28,18 +28,41 @@ const experiences = [
   },
 ];
 
-function ExperienceItem({ exp, idx, start, end, scrollYProgress, layout }: any) {
+interface ExperienceItemProps {
+  exp: { role: string; company: string; duration: string; description: string };
+  idx: number;
+  start: number;
+  end: number;
+  scrollYProgress: MotionValue<number>;
+  layout: string;
+}
+
+function ExperienceItem({
+  exp,
+  idx,
+  start,
+  end,
+  scrollYProgress,
+  layout,
+}: ExperienceItemProps) {
   const markerScale = useTransform(scrollYProgress, [start, end], [0, 1]);
   const markerOpacity = useTransform(scrollYProgress, [start, end], [0, 1]);
   const cardOpacity = useTransform(scrollYProgress, [start, end], [0, 1]);
 
   const isAbove = idx % 2 === 0;
-  const cardY = useTransform(scrollYProgress, [start, end], [isAbove ? 30 : -30, 0]);
+  const cardY = useTransform(
+    scrollYProgress,
+    [start, end],
+    [isAbove ? 30 : -30, 0],
+  );
   const cardX = useTransform(scrollYProgress, [start, end], [-24, 0]);
 
   if (layout === "desktop") {
     return (
-      <div className="relative flex-1 flex justify-center items-center min-w-0" key={`${exp.company}-${exp.role}-${idx}`}>
+      <div
+        className="relative flex-1 flex justify-center items-center min-w-0"
+        key={`${exp.company}-${exp.role}-${idx}`}
+      >
         <motion.div
           className="z-10 w-7 h-7 rounded-full bg-white shadow-[0_0_0_8px_rgba(255,255,255,0.1)]"
           style={{ scale: markerScale, opacity: markerOpacity }}
@@ -54,7 +77,9 @@ function ExperienceItem({ exp, idx, start, end, scrollYProgress, layout }: any) 
           transition={{ duration: 0.4, delay: idx * 0.15 }}
         >
           <h3 className="text-xl font-semibold">{exp.role}</h3>
-          <p className="text-md text-gray-400 mb-3">{exp.company} | {exp.duration}</p>
+          <p className="text-md text-gray-400 mb-3">
+            {exp.company} | {exp.duration}
+          </p>
           <p className="text-md text-gray-300 break-words">{exp.description}</p>
         </motion.article>
       </div>
@@ -62,7 +87,10 @@ function ExperienceItem({ exp, idx, start, end, scrollYProgress, layout }: any) 
   }
 
   return (
-    <div key={`${exp.company}-${exp.role}-m-${idx}`} className="relative flex items-start">
+    <div
+      key={`${exp.company}-${exp.role}-m-${idx}`}
+      className="relative flex items-start"
+    >
       <motion.div
         className="absolute -left-3.5 top-3 z-10 w-7 h-7 rounded-full bg-white shadow-[0_0_0_8px_rgba(255,255,255,0.1)]"
         style={{ scale: markerScale, opacity: markerOpacity }}
@@ -73,7 +101,9 @@ function ExperienceItem({ exp, idx, start, end, scrollYProgress, layout }: any) 
         transition={{ duration: 0.4, delay: idx * 0.15 }}
       >
         <h3 className="text-lg font-semibold break-words">{exp.role}</h3>
-        <p className="text-sm text-gray-400 mb-2 break-words">{exp.company} | {exp.duration}</p>
+        <p className="text-sm text-gray-400 mb-2 break-words">
+          {exp.company} | {exp.duration}
+        </p>
         <p className="text-sm text-gray-300 break-words">{exp.description}</p>
       </motion.article>
     </div>
@@ -91,14 +121,23 @@ export default function Experience() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const SCENE_HEIGHT_VH = isMobile ? 100 * experiences.length * 1.6 : 100 * experiences.length * 1.2;
+  const SCENE_HEIGHT_VH = isMobile
+    ? 100 * experiences.length * 1.6
+    : 100 * experiences.length * 1.2;
 
-  const { scrollYProgress } = useScroll({ target: sceneRef, offset: ["start start", "end end"] });
+  const { scrollYProgress } = useScroll({
+    target: sceneRef,
+    offset: ["start start", "end end"],
+  });
 
   const numExperiences = experiences.length;
   const thresholds = React.useMemo(
-    () => Array.from({ length: numExperiences }, (_, i) => (i + 1) / numExperiences),
-    [numExperiences]
+    () =>
+      Array.from(
+        { length: numExperiences },
+        (_, i) => (i + 1) / numExperiences,
+      ),
+    [numExperiences],
   );
 
   const lineWidth = useTransform(scrollYProgress, (v) => `${v * 100}%`);
@@ -106,17 +145,27 @@ export default function Experience() {
 
   return (
     <section id="experience" className="relative bg-black text-white ">
-      <div ref={sceneRef} style={{ height: `${SCENE_HEIGHT_VH}vh`, minHeight: "120vh" }} className="relative">
+      <div
+        ref={sceneRef}
+        style={{ height: `${SCENE_HEIGHT_VH}vh`, minHeight: "120vh" }}
+        className="relative"
+      >
         <div className="sticky top-0 h-screen flex flex-col">
           <div className="shrink-0 px-4 sm:px-6 pt-6 sm:pt-8">
-            <TextReveal text="Experience" className="text-3xl sm:text-4xl lg:text-5xl font-semibold mt-3 sm:mt-5 text-center justify-center" />
+            <TextReveal
+              text="Experience"
+              className="text-3xl sm:text-4xl lg:text-5xl font-semibold mt-3 sm:mt-5 text-center justify-center"
+            />
           </div>
           <div className="flex-1 flex items-center justify-center px-4 sm:px-6 pb-8 sm:pb-10">
             <div className="relative w-full max-w-7xl hidden md:block">
               <div className="relative h-[6px] bg-white/10 rounded overflow-hidden shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]">
-                <motion.div 
-                  className="absolute left-0 top-0 h-[6px] bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] rounded origin-left" 
-                  style={{ width: lineWidth, boxShadow: "0 0 20px 2px rgba(28,216,210,0.6)" }} 
+                <motion.div
+                  className="absolute left-0 top-0 h-[6px] bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] rounded origin-left"
+                  style={{
+                    width: lineWidth,
+                    boxShadow: "0 0 20px 2px rgba(28,216,210,0.6)",
+                  }}
                 />
               </div>
               <div className="relative flex justify-between mt-0">
@@ -139,9 +188,12 @@ export default function Experience() {
             </div>
             <div className="relative w-full max-w-md md:hidden">
               <div className="absolute left-0 top-0 bottom-0 w-[6px] bg-white/10 rounded overflow-hidden shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]">
-                <motion.div 
-                  className="absolute top-0 left-0 w-[6px] bg-gradient-to-b from-[#1CD8D2] via-[#00bf8f] to-[#302b63] rounded origin-top" 
-                  style={{ height: lineHeight, boxShadow: "0 0 20px 2px rgba(28,216,210,0.6)" }} 
+                <motion.div
+                  className="absolute top-0 left-0 w-[6px] bg-gradient-to-b from-[#1CD8D2] via-[#00bf8f] to-[#302b63] rounded origin-top"
+                  style={{
+                    height: lineHeight,
+                    boxShadow: "0 0 20px 2px rgba(28,216,210,0.6)",
+                  }}
                 />
               </div>
               <div className="relative flex flex-col gap-10 ml-10 mt-6 pb-28">

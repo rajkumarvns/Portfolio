@@ -1,0 +1,27 @@
+ls:
+  src/app/*: kebab-case
+  src/components/*: PascalCase
+  src/components/__tests__/*: PascalCase
+  src/lib/*: kebab-case
+
+ignore:
+  - .git
+  - .next
+  - node_modules
+  - .cspell.json
+  - .eslintrc.json
+  - .gitignore
+  - .ls-lint.yml
+  - .prettierignore
+  - .prettierrc
+  - jest.config.ts
+  - jest.setup.ts
+  - next-env.d.ts
+  - next.config.ts
+  - package-lock.json
+  - package.json
+  - postcss.config.mjs
+  - README.md
+  - tailwind.config.ts
+  - tsconfig.json
+  - public/*

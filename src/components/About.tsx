@@ -21,7 +21,6 @@ export default function About() {
 
       {/* Content container */}
       <div className="relative z-10 max-w-6xl w-full mx-auto px-6 md:px-10 lg:px-12 py-20 flex flex-col gap-12">
-
         {/* Profile header */}
         <motion.div
           className="flex flex-col md:flex-row items-center md:items-stretch gap-8"
@@ -38,7 +37,13 @@ export default function About() {
             aria-hidden="true"
           >
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 to-transparent" />
-            <Image src="/raj_avatar.jpeg" alt="Raj Kumar Gupta" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+            <Image
+              src="/raj_avatar.jpeg"
+              alt="Raj Kumar Gupta"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
           </motion.div>
 
           {/* Name + Role + Bio + CTAs */}
@@ -51,7 +56,11 @@ export default function About() {
             </p>
 
             <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
-              I build scalable, modern applications with a strong focus on clean architecture, delightful UX, and performance. My toolkit spans Java, React, Node.js, Next.js, Tailwind CSS, and Python—bringing ideas to life from concept to production with robust APIs and smooth interfaces.
+              I build scalable, modern applications with a strong focus on clean
+              architecture, delightful UX, and performance. My toolkit spans
+              Java, React, Node.js, Next.js, Tailwind CSS, and Python—bringing
+              ideas to life from concept to production with robust APIs and
+              smooth interfaces.
             </p>
 
             {/* Quick stats */}
@@ -110,15 +119,18 @@ export default function About() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.4 }}
           >
-            <TextReveal 
-              text="About Me" 
-              className="text-2xl sm:text-3xl font-bold text-white mb-3" 
+            <TextReveal
+              text="About Me"
+              className="text-2xl sm:text-3xl font-bold text-white mb-3"
             />
             <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-              I’m a Software Developer and Web Enthusiast — passionate about building fast, resilient applications and sharing coding insights on LinkedIn.
+              I’m a Software Developer and Web Enthusiast — passionate about
+              building fast, resilient applications and sharing coding insights
+              on LinkedIn.
             </p>
             <p className="mt-4 text-gray-400 text-base sm:text-lg">
-              I love turning ideas into scalable, user-friendly products that make an impact.
+              I love turning ideas into scalable, user-friendly products that
+              make an impact.
             </p>
           </motion.div>
         </div>

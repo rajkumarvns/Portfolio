@@ -8,7 +8,7 @@ export default function Magnetic({
   stiffness = 150,
   damping = 15,
   mass = 0.5,
-  pull = 0.3, 
+  pull = 0.3,
   className = "inline-block",
 }: {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ export default function Magnetic({
   const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
     // Only apply magnetic effect on devices with a mouse pointer
     if (window.matchMedia("(pointer: coarse)").matches) return;
-    
+
     const { clientX, clientY } = e;
     const { height, width, left, top } = ref.current!.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);

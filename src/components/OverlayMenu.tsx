@@ -1,26 +1,90 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { FiX, FiHome, FiUser, FiCode, FiBriefcase, FiMail, FiAward, FiChevronRight } from "react-icons/fi";
+import {
+  FiX,
+  FiHome,
+  FiUser,
+  FiCode,
+  FiBriefcase,
+  FiMail,
+  FiAward,
+  FiChevronRight,
+} from "react-icons/fi";
+import { useEffect, useState } from "react";
+interface OverlayMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+  hamburgerRef: React.RefObject<HTMLElement | null>;
+}
 
-export default function OverlayMenu({ isOpen, onClose, hamburgerRef }: any) {
-  const getOrigin = () => {
-    if (typeof window === "undefined" || !hamburgerRef?.current) return "50% 50%";
-    
-    const rect = hamburgerRef.current.getBoundingClientRect();
-    const x = (rect.left + rect.width / 2) / window.innerWidth * 100;
-    const y = (rect.top + rect.height / 2) / window.innerHeight * 100;
-    
-    return `${x}% ${y}%`;
-  };
+export default function OverlayMenu({
+  isOpen,
+  onClose,
+  hamburgerRef,
+}: OverlayMenuProps) {
+  const [origin, setOrigin] = useState("50% 50%");
+  const [particles, setParticles] = useState<
+    { x: number; y: number; dur: number; delay: number }[]
+  >([]);
+
+  useEffect(() => {
+    if (isOpen && typeof window !== "undefined") {
+      if (hamburgerRef?.current) {
+        const rect = hamburgerRef.current.getBoundingClientRect();
+        const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
+        const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
+        setOrigin(`${x}% ${y}%`);
+      }
+
+      setParticles(
+        Array.from({ length: 20 }).map(() => ({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          dur: 3 + Math.random() * 2,
+          delay: Math.random() * 2,
+        })),
+      );
+    }
+  }, [isOpen, hamburgerRef]);
 
   const menuItems = [
-    { name: "Home", icon: FiHome, color: "from-pink-500 to-rose-500", description: "Welcome back" },
-    { name: "About", icon: FiUser, color: "from-purple-500 to-indigo-500", description: "Who I am" },
-    { name: "Skills", icon: FiCode, color: "from-blue-500 to-cyan-500", description: "What I do" },
-    { name: "Projects", icon: FiBriefcase, color: "from-emerald-500 to-teal-500", description: "My work" },
-    { name: "Experience", icon: FiAward, color: "from-orange-500 to-amber-500", description: "Journey so far" },
-    { name: "Contact", icon: FiMail, color: "from-red-500 to-pink-500", description: "Let's talk" },
+    {
+      name: "Home",
+      icon: FiHome,
+      color: "from-pink-500 to-rose-500",
+      description: "Welcome back",
+    },
+    {
+      name: "About",
+      icon: FiUser,
+      color: "from-purple-500 to-indigo-500",
+      description: "Who I am",
+    },
+    {
+      name: "Skills",
+      icon: FiCode,
+      color: "from-blue-500 to-cyan-500",
+      description: "What I do",
+    },
+    {
+      name: "Projects",
+      icon: FiBriefcase,
+      color: "from-emerald-500 to-teal-500",
+      description: "My work",
+    },
+    {
+      name: "Experience",
+      icon: FiAward,
+      color: "from-orange-500 to-amber-500",
+      description: "Journey so far",
+    },
+    {
+      name: "Contact",
+      icon: FiMail,
+      color: "from-red-500 to-pink-500",
+      description: "Let's talk",
+    },
   ];
 
   return (
@@ -37,30 +101,27 @@ export default function OverlayMenu({ isOpen, onClose, hamburgerRef }: any) {
           />
 
           <motion.div
-            initial={{ clipPath: `circle(0% at ${getOrigin()})` }}
-            animate={{ clipPath: `circle(150% at ${getOrigin()})` }}
-            exit={{ clipPath: `circle(0% at ${getOrigin()})` }}
+            initial={{ clipPath: `circle(0% at ${origin})` }}
+            animate={{ clipPath: `circle(150% at ${origin})` }}
+            exit={{ clipPath: `circle(0% at ${origin})` }}
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             className="fixed inset-0 z-[60] flex items-center justify-center overflow-hidden"
             style={{ backgroundColor: "#0f0f1a" }}
           >
             <div className="absolute inset-0 overflow-hidden">
-              {[...Array(20)].map((_, i) => (
+              {particles.map((p, i) => (
                 <motion.div
                   key={i}
                   className="absolute w-1 h-1 bg-white/20 rounded-full"
-                  initial={{
-                    x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
-                    y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
-                  }}
+                  initial={{ x: p.x, y: p.y }}
                   animate={{
-                    y: [null, -100, null], 
+                    y: [null, -100, null],
                     opacity: [0, 1, 0],
                   }}
                   transition={{
-                    duration: 3 + Math.random() * 2,
+                    duration: p.dur,
                     repeat: Infinity,
-                    delay: Math.random() * 2,
+                    delay: p.delay,
                   }}
                 />
               ))}
@@ -124,7 +185,7 @@ export default function OverlayMenu({ isOpen, onClose, hamburgerRef }: any) {
                               className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                               initial={false}
                             />
-                            
+
                             <div className="relative flex items-center space-x-3 sm:space-x-4">
                               <motion.div
                                 whileHover={{ rotate: [0, -10, 10, -5, 0] }}
@@ -135,9 +196,11 @@ export default function OverlayMenu({ isOpen, onClose, hamburgerRef }: any) {
                                   <Icon className="text-xl sm:text-2xl text-white group-hover:scale-110 transition-transform duration-300" />
                                 </div>
                               </motion.div>
-                              
+
                               <div className="flex-1 min-w-0">
-                                <h3 className={`text-lg sm:text-xl font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent truncate`}>
+                                <h3
+                                  className={`text-lg sm:text-xl font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent truncate`}
+                                >
                                   {item.name}
                                 </h3>
                                 <p className="text-xs sm:text-sm text-gray-400 truncate">
@@ -150,7 +213,9 @@ export default function OverlayMenu({ isOpen, onClose, hamburgerRef }: any) {
                                 whileHover={{ x: 0, opacity: 1 }}
                                 className="hidden sm:block"
                               >
-                                <FiChevronRight className={`text-xl bg-gradient-to-r ${item.color} bg-clip-text text-transparent`} />
+                                <FiChevronRight
+                                  className={`text-xl bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
+                                />
                               </motion.div>
                             </div>
 
