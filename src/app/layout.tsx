@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Raj Kumar Gupta | Portfolio",
+  title: "Raj Portfolio",
   description:
     "Portfolio of Raj Kumar Gupta, Software Developer specializing in MERN Stack, Core Java & Python.",
 };
