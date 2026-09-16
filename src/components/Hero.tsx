@@ -231,7 +231,7 @@ const Hero = forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
                 </Magnetic>
                 <Magnetic>
                   <a
-                    href="/Raj_Gupta9.pdf"
+                    href="/Raj_GuptaN.pdf"
                     download
                     className="w-full sm:w-auto px-6 py-3 rounded-full text-base sm:text-lg font-medium text-black bg-white text-center
                   hover:bg-gray-200 shadow-lg hover:scale-105 transition-all block"
