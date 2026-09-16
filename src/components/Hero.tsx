@@ -61,7 +61,7 @@ const HeroAvatar = () => {
 
   return (
     <motion.div
-      className="relative hidden lg:block h-full w-full"
+      className="relative block min-h-[350px] lg:h-full w-full mt-8 lg:mt-0 flex items-center justify-center lg:justify-end"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -74,11 +74,10 @@ const HeroAvatar = () => {
       transition={{ delay: 0.2, duration: 0.8 }}
     >
       <div
-        className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
+        className="absolute top-1/2 -translate-y-1/2 pointer-events-none lg:right-[10px]"
         style={{
-          right: "10px",
-          width: "min(22vw, 410px)",
-          height: "min(40vw, 760px)",
+          width: "min(60vw, 410px)",
+          height: "min(80vw, 760px)",
           borderRadius: "50%",
           filter: "blur(38px)",
           opacity: 0.32,
@@ -89,10 +88,8 @@ const HeroAvatar = () => {
       <motion.img
         src="/hero_avtar.png"
         alt="Software Developer avatar"
-        className="absolute top-1/2 -translate-y-1/2 object-contain select-none pointer-events-none"
+        className="relative lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:right-[-30px] object-contain select-none pointer-events-none w-[70vw] lg:w-[45vw] max-w-[400px] lg:max-w-[780px]"
         style={{
-          right: "-30px",
-          width: "min(45vw, 780px)",
           maxHeight: "90vh",
           transform: "translateZ(50px)",
           zIndex: 20,
@@ -234,7 +231,7 @@ const Hero = forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
                 </Magnetic>
                 <Magnetic>
                   <a
-                    href="/Raj_Kumar_Gupta_Resume.pdf"
+                    href="/Raj_Gupta9.pdf"
                     download
                     className="w-full sm:w-auto px-6 py-3 rounded-full text-base sm:text-lg font-medium text-black bg-white text-center
                   hover:bg-gray-200 shadow-lg hover:scale-105 transition-all block"

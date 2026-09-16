@@ -9,7 +9,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(MorphSVGPlugin);
 }
 
-const greetings = ["Hii", "Hello", "नमस्ते", "Hola", "Hej", "Hallo"];
+const greetings = ["Hello", "नमस्ते", "Hii"];
 
 export default function IntroAnimation({
   onFinish,
